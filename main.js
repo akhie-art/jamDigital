@@ -1,26 +1,35 @@
-let section = document.querySelector("section"),
-  icons = document.querySelector(".icon");
-icons.onclick = () => {
-  section.classList.toggle("dark");
-};
+let hr = document.querySelector("#hrs");
+let mn = document.querySelector("#min");
+let sc = document.querySelector("#sec");
+
 setInterval(() => {
-  let date = new Date();
-  jam = date.getHours();
-  menit = date.getMinutes();
-  detik = date.getSeconds();
-  bulan = date.getMonth();
+  let day = new Date();
+  let hh = day.getHours() * 30;
+  let mm = day.getMinutes() * 6;
+  let ss = day.getSeconds() * 6;
 
-  let d;
-  d = jam < 12 ? "AM" : "PM";
-  jam = jam > 12 ? jam - 12 : jam;
-  jam = jam == 0 ? (jam = 12) : jam;
+  hr.style.transform = `rotateZ(${hh + mm / 12}deg)`;
+  mn.style.transform = `rotateZ(${mm}deg )`;
+  sc.style.transform = `rotateZ(${ss}deg )`;
 
-  jam = jam < 10 ? "0" + jam : jam;
-  menit = menit < 10 ? "0" + menit : menit;
-  detik = detik < 10 ? "0" + detik : detik;
+  let hour = document.getElementById("hour");
+  let minutes = document.getElementById("minutes");
+  let seconds = document.getElementById("seconds");
+  let ampm = document.getElementById("ampm");
+  let h = new Date().getHours();
+  let m = new Date().getMinutes();
+  let s = new Date().getSeconds();
 
-  document.querySelector(".hour_num").innerHTML = jam;
-  document.querySelector(".min_num").innerHTML = menit;
-  document.querySelector(".sec_num").innerHTML = detik;
-  document.querySelector(".am_pm").innerHTML = d;
-}, 1000);
+  var am = h >= 12 ? "PM" : "AM";
+
+  if (h > 12) {
+    h = h - 12;
+  }
+  h = h < 10 ? "0" + h : h;
+  m = m < 10 ? "0" + m : m;
+  s = s < 10 ? "0" + s : s;
+  hour.innerHTML = h;
+  minutes.innerHTML = m;
+  seconds.innerHTML = s;
+  ampm.innerHTML = am;
+});
